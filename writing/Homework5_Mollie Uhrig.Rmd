@@ -1,0 +1,18 @@
+---
+title: "ERHS535_Homework5"
+author: "Mollie Uhrig"
+date: "2024-10-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+List of files in data directory:
+
+```{r}
+getwd()
+list.files("../data")
+```
+
