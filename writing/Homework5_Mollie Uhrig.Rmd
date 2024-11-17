@@ -37,6 +37,16 @@ homicides_co <- homicides %>%
 
 ```
 
+Separating categories of homicids:
+
+```{r}
+homicides_co_sep <- homicides_co %>% 
+  mutate(unsolved_homicides = disposition %in% c("Closed without arrest", 
+                            "Open/No arrest"))
+
+```
+
+
 
 Denver neighborhoods:
 
@@ -49,9 +59,10 @@ Setting up homicides data in sf format:
 
 ```{r}
 #Setting up homicides in sf format
-hom_co_sf <- homicides_co %>% 
+hom_co_sf <- homicides_co_sep %>% 
   st_as_sf(coords = c("lon", "lat"), crs=4326)
 ```
+
 
 Making the map (option 1):
 
