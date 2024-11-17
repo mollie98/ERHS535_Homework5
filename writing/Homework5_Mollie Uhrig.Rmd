@@ -16,3 +16,57 @@ getwd()
 list.files("../data")
 ```
 
+Reading in data:
+```{r}
+library(readr)
+
+hom_url <- paste0("https://raw.githubusercontent.com/washingtonpost/data-homicides/refs/heads/master/homicide-data.csv")
+
+homicides <- read_csv(hom_url)
+```
+
+Cleaning data:
+
+```{r}
+library(tidyverse)
+library(dplyr)
+homicides_co <- homicides %>% 
+  mutate(city_name = paste0(city, ", ", state)) %>% 
+  filter(city_name == "Denver, CO") %>% 
+  select("lat", "lon", "victim_race", "disposition")
+
+```
+
+
+Denver neighborhoods:
+
+```{r}
+library(tigris)
+denver <- block_groups(state = c("Colorado"), county = c("Denver"), cb= TRUE, class= "sf")
+```
+
+Setting up homicides data in sf format:
+
+```{r}
+#Setting up homicides in sf format
+hom_co_sf <- homicides_co %>% 
+  st_as_sf(coords = c("lon", "lat"), crs=4326)
+```
+
+Making the map (option 1):
+
+```{r}
+library(sf)
+library(ggplot2)
+
+ggplot() +
+  geom_sf(data = denver) +
+  geom_sf(data = hom_co_sf) +
+  coord_sf(datum = st_crs(4326)) +
+  labs(y="Latitude", x="Longitude")+
+  ylim(39.6, 39.85)+
+  xlim(105.1, 104.7)+
+  theme_bw()
+
+```
+
