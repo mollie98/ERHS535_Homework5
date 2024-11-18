@@ -19,6 +19,7 @@ list.files("../data")
 Reading in data:
 
 ```{r}
+#Reading data from Github
 library(readr)
 
 hom_url <- paste0("https://raw.githubusercontent.com/washingtonpost/data-homicides/refs/heads/master/homicide-data.csv")
