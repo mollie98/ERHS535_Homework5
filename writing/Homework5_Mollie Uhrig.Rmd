@@ -1,7 +1,7 @@
 ---
 title: "ERHS535_Homework5"
 author: "Mollie Uhrig"
-date: "2024-10-25"
+date: "2024-11-18"
 output: html_document
 ---
 
@@ -17,6 +17,7 @@ list.files("../data")
 ```
 
 Reading in data:
+
 ```{r}
 library(readr)
 
@@ -34,18 +35,25 @@ homicides_co <- homicides %>%
   mutate(city_name = paste0(city, ", ", state)) %>% 
   filter(city_name == "Denver, CO") %>% 
   select("lat", "lon", "victim_race", "disposition")
-
 ```
 
-Separating categories of homicids:
+Separating categories of homicides:
 
 ```{r}
-homicides_co_sep <- homicides_co %>% 
-  mutate(unsolved_homicides = disposition %in% c("Closed without arrest", 
-                            "Open/No arrest"))
 
+homicides_co_sep <- homicides_co %>% 
+  mutate(status = ifelse (disposition == "Closed without arrest" | disposition == "Open/No arrest", "Unsolved", "Solved")) 
+  
 ```
 
+Determining three races with highest number of homicides:
+
+```{r}
+library(forcats)
+library(dplyr)
+homicides_co_sep <- homicides_co_sep%>% 
+  mutate(victim_race = forcats::fct_lump(victim_race, n = 3))
+```
 
 
 Denver neighborhoods:
@@ -66,18 +74,19 @@ hom_co_sf <- homicides_co_sep %>%
 
 Making the map (option 1):
 
-```{r}
+```{r, fig.width=14, fig.height=6}
 library(sf)
 library(ggplot2)
 
 ggplot() +
   geom_sf(data = denver) +
-  geom_sf(data = hom_co_sf) +
+  geom_sf(data = hom_co_sf, aes(color= victim_race)) +
   coord_sf(datum = st_crs(4326)) +
   labs(y="Latitude", x="Longitude")+
   ylim(39.6, 39.85)+
   xlim(105.1, 104.7)+
-  theme_bw()
-
+  ggtitle("Homicides in Denver, Colorado") +
+  theme_bw()+
+  facet_wrap(~ status)
 ```
 
