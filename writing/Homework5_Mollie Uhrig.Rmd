@@ -74,7 +74,7 @@ hom_co_sf <- homicides_co_sep %>%
 
 Making the map (option 1):
 
-```{r, fig.width=14, fig.height=6}
+```{r, fig.width=6, fig.height=8}
 library(sf)
 library(ggplot2)
 
@@ -82,11 +82,11 @@ ggplot() +
   geom_sf(data = denver) +
   geom_sf(data = hom_co_sf, aes(color= victim_race)) +
   coord_sf(datum = st_crs(4326)) +
-  labs(y="Latitude", x="Longitude")+
+  labs(y="Latitude", x="Longitude", color= "Victim Race")+
   ylim(39.6, 39.85)+
   xlim(105.1, 104.7)+
   ggtitle("Homicides in Denver, Colorado") +
   theme_bw()+
-  facet_wrap(~ status)
+  facet_wrap(~ status, ncol = 1)
 ```
 
