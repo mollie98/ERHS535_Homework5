@@ -30,6 +30,7 @@ homicides <- read_csv(hom_url)
 Cleaning data:
 
 ```{r}
+#Organizing the data to narrow down the dataset for relevance. 
 library(tidyverse)
 library(dplyr)
 homicides_co <- homicides %>% 
