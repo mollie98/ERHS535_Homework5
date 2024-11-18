@@ -74,7 +74,7 @@ hom_co_sf <- homicides_co_sep %>%
 
 Making the map (option 1):
 
-```{r, fig.width=6, fig.height=8}
+```{r, fig.width=5, fig.height=8}
 library(sf)
 library(ggplot2)
 
