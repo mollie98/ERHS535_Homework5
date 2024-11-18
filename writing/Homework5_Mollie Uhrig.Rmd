@@ -51,6 +51,7 @@ homicides_co_sep <- homicides_co %>%
 Determining three races with highest number of homicides:
 
 ```{r}
+#Using fct_lump to determine races with highest number of homicides and make an "other" group. 
 library(forcats)
 library(dplyr)
 homicides_co_sep <- homicides_co_sep%>% 
