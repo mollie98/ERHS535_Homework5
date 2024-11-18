@@ -62,6 +62,7 @@ homicides_co_sep <- homicides_co_sep%>%
 Denver neighborhoods:
 
 ```{r}
+#Reading in data for Denver block groups
 library(tigris)
 denver <- block_groups(state = c("Colorado"), county = c("Denver"), cb= TRUE, class= "sf")
 ```
