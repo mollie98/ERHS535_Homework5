@@ -79,6 +79,8 @@ hom_co_sf <- homicides_co_sep %>%
 Making the map (option 1):
 
 ```{r, fig.width=5, fig.height=8}
+#Layering the data for Denver blocks with the homicides coordinates and generating the map. 
+
 library(sf)
 library(ggplot2)
 
