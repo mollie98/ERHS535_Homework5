@@ -94,6 +94,7 @@ ggplot() +
   ggtitle("Homicides in Denver, Colorado") +
   theme_bw()+
   facet_wrap(~ status, ncol = 1)
+#Used crs of 4326 for standard coordinate data. 
 #Facet_wrap with ncol=1 to make the maps larger and easier to see. 
 ```
 
