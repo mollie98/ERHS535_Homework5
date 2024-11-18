@@ -42,7 +42,7 @@ homicides_co <- homicides %>%
 Separating categories of homicides:
 
 ```{r}
-
+#Categories of homicides- unsolved and solved
 homicides_co_sep <- homicides_co %>% 
   mutate(status = ifelse (disposition == "Closed without arrest" | disposition == "Open/No arrest", "Unsolved", "Solved")) 
   
